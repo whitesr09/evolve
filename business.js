@@ -1,46 +1,69 @@
-const businessModels=[
- {id:'service',icon:'🎨',name:'Skill Service',desc:'Sell a skill directly: design, editing, tutoring or freelancing.',cash:0,demand:45,margin:85,risk:20},
- {id:'digital',icon:'📦',name:'Digital Product',desc:'Build once, sell repeatedly: templates, guides or small tools.',cash:0,demand:35,margin:95,risk:35},
- {id:'resell',icon:'🛍️',name:'Reselling',desc:'Source low, sell higher. Faster market feedback, but needs working capital.',cash:800,demand:55,margin:35,risk:50}
+(()=>{
+const KEY='evolve-v01';
+const models=[
+{id:'service',icon:'🎨',name:'Skill Service',desc:'Sell a skill directly: design, editing, tutoring or freelancing.',cash:150,demand:44,margin:82,risk:18,brand:26},
+{id:'digital',icon:'📦',name:'Digital Product',desc:'Build once, sell repeatedly: templates, guides or small tools.',cash:100,demand:34,margin:94,risk:34,brand:24},
+{id:'resell',icon:'🛍️',name:'Reselling',desc:'Source low, sell higher. Faster feedback, but working-capital risk.',cash:900,demand:54,margin:36,risk:48,brand:22}
 ];
-
-const businessEvents=[
- {title:'First 10 customers',text:'People are interested, but most say your offer feels too generic.',choices:[
-  {t:'Niche down to one clear customer',s:'Make the offer more specific.',fx:{demand:14,brand:10,cash:150,stress:2},xp:18,out:'Clearer positioning increases conversion.'},
-  {t:'Lower the price heavily',s:'Try to win on affordability.',fx:{demand:8,brand:-4,cash:80,stress:4},xp:11,out:'You gain attention, but train customers to expect cheap pricing.'},
-  {t:'Add more features',s:'Make the offer look bigger.',fx:{demand:3,brand:2,cash:-100,stress:10},xp:9,out:'More features increase work before proving what customers actually value.'}
- ]},
- {title:'A competitor appears',text:'Someone launches a similar offer with better presentation.',choices:[
-  {t:'Improve the customer experience',s:'Keep the core offer, make delivery noticeably better.',fx:{demand:9,brand:15,cash:-120,stress:4},xp:17,out:'Differentiation through experience protects you from pure price competition.'},
-  {t:'Copy their features quickly',s:'Close the gap fast.',fx:{demand:5,brand:-5,cash:-80,stress:9},xp:10,out:'You reduce the visible gap, but become reactive.'},
-  {t:'Ignore them and talk to customers',s:'Find what buyers actually care about.',fx:{demand:12,brand:8,cash:30,stress:1},xp:19,out:'Customer evidence gives you a stronger response than competitor anxiety.'}
- ]},
- {title:'Cash gets tight',text:'Growth is happening, but your available cash is nearly gone.',choices:[
-  {t:'Cut low-value expenses',s:'Protect runway without touching the core product.',fx:{cash:350,demand:-2,brand:0,stress:-3},xp:18,out:'Runway improves while the customer experience stays mostly intact.'},
-  {t:'Spend more on promotion',s:'Try to grow out of the problem.',fx:{cash:-250,demand:18,brand:4,stress:8},xp:13,out:'Aggressive growth can work, but it makes a cash problem more dangerous.'},
-  {t:'Pause expansion and sell manually',s:'Do direct outreach before spending again.',fx:{cash:220,demand:10,brand:5,stress:5},xp:20,out:'Manual selling gives cash and information at the same time.'}
- ]},
- {title:'Customers ask for something new',text:'Several buyers request the same add-on.',choices:[
-  {t:'Pre-sell it before building',s:'Validate willingness to pay first.',fx:{cash:260,demand:10,brand:9,stress:2},xp:20,out:'Pre-selling reduces product risk and funds development.'},
-  {t:'Build it immediately',s:'Move fast while interest is high.',fx:{cash:-180,demand:12,brand:8,stress:9},xp:14,out:'Speed helps, but you commit resources before confirming payment.'},
-  {t:'Say no and stay focused',s:'Protect simplicity.',fx:{cash:20,demand:-3,brand:3,stress:-5},xp:13,out:'Focus stays strong, though you may leave a validated opportunity unexplored.'}
- ]},
- {title:'A growth opportunity',text:'A creator offers to promote you, but wants a share of every sale they generate.',choices:[
-  {t:'Agree with tracked commission',s:'Pay only when sales happen.',fx:{cash:420,demand:20,brand:13,stress:3},xp:20,out:'Performance-based distribution limits downside and expands reach.'},
-  {t:'Pay a fixed fee upfront',s:'Keep all future revenue.',fx:{cash:-300,demand:16,brand:10,stress:6},xp:11,out:'You keep upside, but carry the acquisition risk yourself.'},
-  {t:'Decline and keep organic growth',s:'Stay independent.',fx:{cash:100,demand:3,brand:4,stress:-2},xp:12,out:'You preserve control, but growth remains slower.'}
- ]}
+const pool=[
+{tier:0,title:'Your first buyers hesitate',text:'People understand the offer, but many still say “I’ll think about it.”',choices:[
+{t:'Interview 5 interested people',s:'Find the real reason they hesitate before changing anything.',fx:{demand:12,brand:7,cash:60,stress:2},xp:20,out:'Customer evidence reveals the actual objection.'},
+{t:'Cut the price by 35%',s:'Make the decision easier immediately.',fx:{demand:8,brand:-5,cash:20,stress:4},xp:11,out:'Conversion rises, but your positioning gets weaker.'},
+{t:'Add more features',s:'Make the offer feel more valuable.',fx:{demand:3,brand:2,cash:-120,stress:9},xp:9,out:'You spend before proving what customers value.'}]},
+{tier:0,title:'A competitor looks much more polished',text:'Their product is similar, but their presentation makes yours look amateur.',choices:[
+{t:'Improve the customer experience',s:'Upgrade delivery, clarity and trust instead of copying features.',fx:{demand:8,brand:15,cash:-100,stress:4},xp:18,out:'Experience becomes a defensible advantage.'},
+{t:'Copy their features quickly',s:'Close the visible gap as fast as possible.',fx:{demand:5,brand:-6,cash:-90,stress:9},xp:10,out:'You become reactive instead of differentiated.'},
+{t:'Talk to customers before reacting',s:'Learn whether buyers even care about the competitor’s advantage.',fx:{demand:11,brand:9,cash:35,stress:1},xp:20,out:'Evidence beats competitor anxiety.'}]},
+{tier:0,title:'Cash is getting uncomfortable',text:'You are growing, but your runway is thinner than expected.',choices:[
+{t:'Cut low-value expenses',s:'Protect runway without damaging the core offer.',fx:{cash:300,demand:-2,brand:0,stress:-3},xp:18,out:'You buy time without hurting the business much.'},
+{t:'Spend harder on promotion',s:'Try to grow out of the cash problem.',fx:{cash:-260,demand:18,brand:4,stress:10},xp:11,out:'Growth rises, but the cash problem becomes more dangerous.'},
+{t:'Sell manually for a week',s:'Do direct outreach before spending again.',fx:{cash:230,demand:9,brand:5,stress:5},xp:20,out:'Manual sales improve both cash and customer understanding.'}]},
+{tier:1,title:'Customers repeatedly request the same add-on',text:'The request appears often enough to look like a real opportunity.',choices:[
+{t:'Pre-sell before building',s:'Ask customers to pay or commit first.',fx:{cash:280,demand:11,brand:10,stress:2},xp:22,out:'Demand funds the feature before you take full product risk.'},
+{t:'Build immediately',s:'Move fast while attention is high.',fx:{cash:-200,demand:13,brand:8,stress:10},xp:14,out:'You move quickly, but commit resources before validation.'},
+{t:'Ignore it completely',s:'Stay focused on the original product.',fx:{cash:30,demand:-5,brand:2,stress:-4},xp:11,out:'Focus stays clean, but you may miss a repeated market signal.'}]},
+{tier:1,title:'A creator offers distribution',text:'They will promote you for a percentage of every tracked sale.',choices:[
+{t:'Use tracked commission',s:'Pay only when revenue is generated.',fx:{cash:380,demand:19,brand:13,stress:3},xp:21,out:'Performance-based distribution limits downside.'},
+{t:'Pay a large flat fee',s:'Keep all upside if the promotion works.',fx:{cash:-330,demand:17,brand:10,stress:7},xp:12,out:'You carry the acquisition risk yourself.'},
+{t:'Stay organic',s:'Preserve control and grow slowly.',fx:{cash:90,demand:3,brand:4,stress:-2},xp:12,out:'You protect control, but your reach stays limited.'}]},
+{tier:1,title:'Your best customer complains publicly',text:'The complaint is partly fair and starts getting attention.',choices:[
+{t:'Acknowledge, fix, and follow up publicly',s:'Own the issue without becoming defensive.',fx:{brand:16,demand:6,cash:-80,stress:5},xp:22,out:'A good recovery can create more trust than pretending nothing happened.'},
+{t:'Argue your side',s:'Explain why the customer is being unfair.',fx:{brand:-14,demand:-8,cash:0,stress:11},xp:7,out:'Being technically right can still damage trust.'},
+{t:'Refund quietly and move on',s:'Solve the individual case without making a public response.',fx:{brand:3,demand:0,cash:-120,stress:2},xp:13,out:'The customer is handled, but the public narrative remains unanswered.'}]},
+{tier:2,title:'Demand spikes suddenly',text:'Orders jump after a viral mention. Capacity is now the bottleneck.',choices:[
+{t:'Limit orders and protect quality',s:'Accept slower growth to preserve customer experience.',fx:{cash:260,demand:8,brand:15,stress:3},xp:21,out:'You convert scarcity into trust instead of chaos.'},
+{t:'Accept everything',s:'Capture every sale while attention lasts.',fx:{cash:620,demand:15,brand:-14,stress:18},xp:12,out:'Revenue surges, but quality and stress deteriorate.'},
+{t:'Raise price moderately',s:'Use price to balance demand and capacity.',fx:{cash:430,demand:-3,brand:6,stress:1},xp:23,out:'Pricing becomes an operating tool, not just a revenue decision.'}]},
+{tier:2,title:'A supplier or platform changes the rules',text:'Your costs rise unexpectedly and your old margin no longer works.',choices:[
+{t:'Reprice and explain the value',s:'Protect unit economics even if some buyers leave.',fx:{cash:220,demand:-6,brand:5,stress:4,margin:6},xp:22,out:'You protect the business instead of hiding a broken margin.'},
+{t:'Absorb the cost',s:'Keep customers happy and hope volume fixes it.',fx:{cash:-320,demand:8,brand:7,stress:9,margin:-8},xp:10,out:'Customers stay happy while the business gets structurally weaker.'},
+{t:'Find an alternate supplier/channel',s:'Spend time reducing dependence.',fx:{cash:-110,demand:1,brand:3,stress:6,margin:10},xp:20,out:'Resilience improves even though the transition costs time and money.'}]},
+{tier:2,title:'You can hire your first helper',text:'You are the bottleneck now. Hiring could unlock capacity, but payroll adds risk.',choices:[
+{t:'Hire part-time for the bottleneck',s:'Delegate the repeatable work first.',fx:{cash:-220,demand:10,brand:8,stress:-8},xp:23,out:'You buy back founder time without overcommitting.'},
+{t:'Hire full-time immediately',s:'Build capacity for future growth.',fx:{cash:-480,demand:15,brand:5,stress:3},xp:13,out:'Capacity rises, but fixed costs become dangerous.'},
+{t:'Keep doing everything yourself',s:'Protect cash and control.',fx:{cash:80,demand:-4,brand:-2,stress:13},xp:10,out:'Cash is protected, but founder overload becomes the constraint.'}]}
 ];
-
-let biz={model:null,round:0,cash:0,demand:0,brand:25,stress:10,revenue:0,xp:0,log:[]};
-function openBusiness(){biz={model:null,round:0,cash:0,demand:0,brand:25,stress:10,revenue:0,xp:0,log:[]};const s=document.getElementById('businessSim');s.classList.add('open');s.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';renderBizStart()}
-function closeBusiness(){const s=document.getElementById('businessSim');s.classList.remove('open');s.setAttribute('aria-hidden','true');document.body.style.overflow=''}
-function renderBizStart(){document.getElementById('businessStep').textContent='START';document.getElementById('businessContent').innerHTML=`<article class="biz-card glass"><p class="biz-kicker">FOUNDER MODE</p><h2>Start with almost nothing.</h2><p class="subtle">Choose a business model. The simulation rewards customer evidence, cash discipline and smart risk — not just aggressive growth.</p></article><div class="biz-options">${businessModels.map(m=>`<button class="biz-option" data-model="${m.id}"><b>${m.icon} ${m.name}</b><small>${m.desc}</small></button>`).join('')}</div>`;document.querySelectorAll('[data-model]').forEach(b=>b.addEventListener('click',()=>startBusiness(b.dataset.model)))}
-function startBusiness(id){const m=businessModels.find(x=>x.id===id);biz.model=m;biz.cash=m.cash;biz.demand=m.demand;biz.brand=25;biz.stress=10;biz.round=0;biz.log.push(`Started ${m.name}`);renderBizEvent()}
-function bizStats(){return `<div class="biz-dashboard"><div class="biz-metric"><span>CASH</span><b>₹${Math.max(0,biz.cash)}</b></div><div class="biz-metric"><span>DEMAND</span><b>${Math.max(0,biz.demand)}</b></div><div class="biz-metric"><span>BRAND</span><b>${Math.max(0,biz.brand)}</b></div><div class="biz-metric"><span>STRESS</span><b>${Math.max(0,biz.stress)}</b></div></div>`}
-function renderBizEvent(){if(biz.round>=businessEvents.length)return renderBizSummary();const e=businessEvents[biz.round];document.getElementById('businessStep').textContent=`${biz.round+1} / ${businessEvents.length}`;document.getElementById('businessContent').innerHTML=`${bizStats()}<article class="biz-event glass"><p class="biz-kicker">${biz.model.icon} ${biz.model.name.toUpperCase()}</p><h3>${e.title}</h3><p class="subtle">${e.text}</p></article><div class="biz-options">${e.choices.map((c,i)=>`<button class="biz-option" data-bizchoice="${i}"><b>${c.t}</b><small>${c.s}</small></button>`).join('')}</div>`;document.querySelectorAll('[data-bizchoice]').forEach(b=>b.addEventListener('click',()=>chooseBiz(Number(b.dataset.bizchoice))))}
-function chooseBiz(i){const e=businessEvents[biz.round],c=e.choices[i];Object.entries(c.fx).forEach(([k,v])=>biz[k]=(biz[k]||0)+v);const sales=Math.max(0,Math.round((biz.demand*(biz.model.margin/100))*3));biz.revenue+=sales;biz.cash+=sales;biz.xp+=c.xp;biz.log.push(`${e.title}: ${c.t}`);document.getElementById('businessContent').innerHTML=`${bizStats()}<article class="biz-result glass"><strong>${c.out}</strong><span class="subtle">Round revenue: ₹${sales} · +${c.xp} XP</span></article><button id="bizNext" class="primary-action">Continue →</button>`;document.getElementById('bizNext').addEventListener('click',()=>{biz.round++;renderBizEvent()})}
-function renderBizSummary(){document.getElementById('businessStep').textContent='RESULT';const score=Math.max(0,Math.round(biz.cash/25+biz.demand+biz.brand-biz.stress));const grade=score>=180?'A':score>=140?'B':score>=100?'C':'D';const label=grade==='A'?'Evidence-Driven Founder':grade==='B'?'Adaptive Builder':grade==='C'?'Promising Operator':'Learning Founder';document.getElementById('businessContent').innerHTML=`<article class="biz-card glass"><p class="biz-kicker">SIMULATION COMPLETE</p><div class="biz-grade">${grade}</div><h2>${label}</h2><p class="subtle">You finished with ₹${Math.max(0,biz.cash)} cash and ₹${biz.revenue} simulated revenue. Your choices show how you balance growth, evidence and runway.</p><div class="biz-summary-grid"><div><span>DEMAND</span><b>${Math.max(0,biz.demand)}</b></div><div><span>BRAND</span><b>${Math.max(0,biz.brand)}</b></div><div><span>STRESS</span><b>${Math.max(0,biz.stress)}</b></div><div><span>XP EARNED</span><b>${biz.xp}</b></div></div><button id="finishBusiness" class="primary-action">Collect XP & return</button></article><div class="biz-log">${biz.log.map(x=>`<div>${x}</div>`).join('')}</div>`;document.getElementById('finishBusiness').addEventListener('click',finishBusiness)}
-function finishBusiness(){state.totalXP+=biz.xp;state.stats.FIN=Math.min(100,state.stats.FIN+3);state.stats.DISC=Math.min(100,state.stats.DISC+1);save();render();closeBusiness();toast(`Business Sim +${biz.xp} XP · FIN increased`)}
-
-document.querySelectorAll('.module-card').forEach(card=>{if(card.dataset.module==='Business Sim')card.addEventListener('click',e=>{e.stopImmediatePropagation();openBusiness()},true)});document.getElementById('closeBusiness').addEventListener('click',closeBusiness);
+const markets=[
+{name:'Calm market',demand:0,cash:0,stress:0},
+{name:'Slow week',demand:-7,cash:-40,stress:2},
+{name:'Word-of-mouth bump',demand:8,cash:70,stress:1},
+{name:'Cost pressure',demand:-2,cash:-90,stress:3},
+{name:'Trend boost',demand:11,cash:100,stress:4}
+];
+let biz;
+const $=id=>document.getElementById(id);const read=()=>{try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch{return{}}};const write=s=>localStorage.setItem(KEY,JSON.stringify(s));
+function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function pickEvents(){const runs=read().businessSessions||0,max=runs>=8?2:runs>=3?1:0;const available=pool.filter(e=>e.tier<=max);return shuffle(available).slice(0,5)}
+function open(){biz={model:null,round:0,cash:0,demand:0,brand:25,stress:10,revenue:0,xp:0,margin:0,events:pickEvents(),log:[],founder:{evidence:0,risk:0,discipline:0}};const s=$('businessSim');s.classList.add('open');s.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';start()}
+function close(){const s=$('businessSim');s.classList.remove('open');s.setAttribute('aria-hidden','true');document.body.style.overflow=''}
+function start(){$('businessStep').textContent='START';$('businessContent').innerHTML=`<article class="biz-card glass"><p class="biz-kicker">FOUNDER MODE</p><h2>Build under uncertainty.</h2><p class="subtle">Every round changes demand, cash, brand and stress. Strong decisions compound; weak unit economics can quietly destroy a growing business.</p></article><div class="biz-options">${models.map(m=>`<button class="biz-option" data-model="${m.id}"><b>${m.icon} ${m.name}</b><small>${m.desc}</small></button>`).join('')}</div>`;$('businessContent').querySelectorAll('[data-model]').forEach(b=>b.onclick=()=>chooseModel(b.dataset.model))}
+function chooseModel(id){const m=models.find(x=>x.id===id);biz.model=m;biz.cash=m.cash;biz.demand=m.demand;biz.brand=m.brand;biz.margin=m.margin;biz.log=[`Started ${m.name}`];event()}
+function stats(){return `<div class="biz-dashboard"><div class="biz-metric"><span>CASH</span><b>₹${Math.round(biz.cash)}</b></div><div class="biz-metric"><span>DEMAND</span><b>${Math.round(biz.demand)}</b></div><div class="biz-metric"><span>BRAND</span><b>${Math.round(biz.brand)}</b></div><div class="biz-metric"><span>STRESS</span><b>${Math.round(biz.stress)}</b></div></div>`}
+function applyMarket(){const m=markets[Math.floor(Math.random()*markets.length)];biz.demand=Math.max(0,biz.demand+m.demand);biz.cash+=m.cash;biz.stress=Math.max(0,biz.stress+m.stress);return m}
+function event(){if(biz.round>=biz.events.length)return summary();const e=biz.events[biz.round],m=applyMarket();$('businessStep').textContent=`${biz.round+1} / ${biz.events.length}`;$('businessContent').innerHTML=`${stats()}<article class="biz-event glass"><p class="biz-kicker">${biz.model.icon} ${biz.model.name.toUpperCase()}</p><div class="biz-market">MARKET: ${m.name.toUpperCase()}</div><h3>${e.title}</h3><p class="subtle">${e.text}</p></article><div class="biz-options">${shuffle(e.choices.map((c,i)=>({...c,_i:i}))).map(c=>`<button class="biz-option" data-bizchoice="${c._i}"><b>${c.t}</b><small>${c.s}</small></button>`).join('')}</div>`;$('businessContent').querySelectorAll('[data-bizchoice]').forEach(b=>b.onclick=()=>choose(+b.dataset.bizchoice))}
+function choose(i){const e=biz.events[biz.round],c=e.choices[i];Object.entries(c.fx).forEach(([k,v])=>biz[k]=(biz[k]||0)+v);if(/interview|customer|pre-sell|tracked|publicly|price/i.test(c.t))biz.founder.evidence+=2;if(/spend|accept everything|full-time|build immediately/i.test(c.t))biz.founder.risk+=2;else biz.founder.discipline+=1;biz.demand=Math.max(0,biz.demand);biz.brand=Math.max(0,biz.brand);biz.stress=Math.max(0,biz.stress);biz.margin=Math.max(5,Math.min(98,biz.margin));const capacity=Math.max(.45,1-Math.max(0,biz.stress-55)/100);const sales=Math.max(0,Math.round(biz.demand*(biz.margin/100)*3*capacity));biz.revenue+=sales;biz.cash+=sales;biz.xp+=c.xp;biz.log.push(`${e.title}: ${c.t}`);const danger=biz.cash<0?' · CASH WARNING':'';$('businessContent').innerHTML=`${stats()}<article class="biz-result glass"><strong>${c.out}</strong><span class="subtle">Round revenue: ₹${sales} · margin ${Math.round(biz.margin)}% · +${c.xp} XP${danger}</span></article><button id="bizNext" class="primary-action">Continue →</button>`;$('bizNext').onclick=()=>{biz.round++;event()}}
+function summary(){const score=Math.max(0,Math.round(biz.cash/22+biz.demand+biz.brand-biz.stress*.7));let label='Learning Founder';if(biz.cash>900&&biz.brand>55&&biz.stress<65)label='Evidence-Driven Founder';else if(biz.demand>75&&biz.cash>400)label='Growth Operator';else if(biz.founder.discipline>=4)label='Runway Strategist';else if(biz.founder.risk>=5)label='High-Risk Builder';const grade=score>=190?'A':score>=145?'B':score>=100?'C':'D';$('businessStep').textContent='RESULT';$('businessContent').innerHTML=`<article class="biz-card glass"><p class="biz-kicker">SIMULATION COMPLETE</p><div class="biz-grade">${grade}</div><h2>${label}</h2><p class="subtle">You finished with ₹${Math.round(biz.cash)} cash and ₹${biz.revenue} simulated revenue. Because market conditions and event order change each run, the same strategy will not always produce the same outcome.</p><div class="biz-summary-grid"><div><span>DEMAND</span><b>${Math.round(biz.demand)}</b></div><div><span>BRAND</span><b>${Math.round(biz.brand)}</b></div><div><span>STRESS</span><b>${Math.round(biz.stress)}</b></div><div><span>XP EARNED</span><b>${biz.xp}</b></div></div><button id="finishBusiness" class="primary-action">Collect XP & return</button></article><div class="biz-log">${biz.log.map(x=>`<div>${x}</div>`).join('')}</div>`;$('finishBusiness').onclick=finish}
+function finish(){const s=read();s.totalXP=(s.totalXP||0)+biz.xp;s.businessSessions=(s.businessSessions||0)+1;s.stats=s.stats||{};s.stats.FIN=Math.min(100,(s.stats.FIN||9)+3);s.stats.DISC=Math.min(100,(s.stats.DISC||11)+1);write(s);if(typeof state!=='undefined'){state.totalXP=s.totalXP;state.businessSessions=s.businessSessions;state.stats={...state.stats,...s.stats}};close();if(typeof render==='function')render();if(typeof toast==='function')toast(`Business Sim +${biz.xp} XP · FIN increased`)}
+window.openBusinessSim=open;document.addEventListener('DOMContentLoaded',()=>{$('closeBusiness')?.addEventListener('click',close);document.querySelectorAll('.module-card').forEach(card=>{if(card.dataset.module==='Business Sim')card.addEventListener('click',e=>{e.stopImmediatePropagation();open()},true)})});
+const style=document.createElement('style');style.textContent='.biz-market{display:inline-flex;margin:5px 0 12px;padding:5px 8px;border-radius:999px;border:1px solid var(--line);font-size:8px;font-weight:900;letter-spacing:.08em;color:var(--muted);background:rgba(127,127,127,.06)}';document.head.appendChild(style);
+})();
