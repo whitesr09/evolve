@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="style.css?v=4" />
   <link rel="stylesheet" href="ui-fixes.css?v=1" />
   <link rel="stylesheet" href="social.css?v=1" />
+  <link rel="stylesheet" href="career.css?v=1" />
 </head>
 <body>
   <div class="ambient ambient-one"></div>
@@ -16,10 +17,7 @@
 
   <main class="app-shell">
     <header class="topbar glass">
-      <div>
-        <p class="eyebrow">PERSONAL GROWTH OS</p>
-        <h1>EVOLVE</h1>
-      </div>
+      <div><p class="eyebrow">PERSONAL GROWTH OS</p><h1>EVOLVE</h1></div>
       <button id="themeToggle" class="icon-btn" aria-label="Switch theme">☀︎</button>
     </header>
 
@@ -27,35 +25,21 @@
       <div class="hero-topline"><span class="live-dot"></span>LIVE PROGRESS</div>
       <h2>N S H D</h2>
       <p class="subtle">Level <strong id="level">1</strong> · <span id="levelTitle">Awakening</span></p>
-      <div class="xp-row">
-        <div class="xp-track" aria-label="XP progress"><div id="xpBar" class="xp-fill"></div></div>
-        <span id="xpText">0 / 100 XP</span>
-      </div>
-      <div class="hero-meta">
-        <span>🔥 <b id="streak">0</b> day streak</span>
-        <span>⚡ <b id="totalXP">0</b> total XP</span>
-      </div>
+      <div class="xp-row"><div class="xp-track" aria-label="XP progress"><div id="xpBar" class="xp-fill"></div></div><span id="xpText">0 / 100 XP</span></div>
+      <div class="hero-meta"><span>🔥 <b id="streak">0</b> day streak</span><span>⚡ <b id="totalXP">0</b> total XP</span></div>
     </section>
 
-    <div class="section-head">
-      <div><p class="eyebrow">YOUR BUILD</p><h3>Core stats</h3></div>
-      <span id="rankBadge" class="rank-badge">Rookie</span>
-    </div>
+    <div class="section-head"><div><p class="eyebrow">YOUR BUILD</p><h3>Core stats</h3></div><span id="rankBadge" class="rank-badge">Rookie</span></div>
     <section id="statsGrid" class="stats-grid"></section>
 
-    <div class="section-head">
-      <div><p class="eyebrow">TODAY</p><h3>Daily quests</h3></div>
-      <span id="questCount" class="subtle">0/0</span>
-    </div>
+    <div class="section-head"><div><p class="eyebrow">TODAY</p><h3>Daily quests</h3></div><span id="questCount" class="subtle">0/0</span></div>
     <section id="questList" class="quest-list"></section>
 
-    <div class="section-head">
-      <div><p class="eyebrow">TRAINING ZONES</p><h3>Choose your next evolution</h3></div>
-    </div>
+    <div class="section-head"><div><p class="eyebrow">TRAINING ZONES</p><h3>Choose your next evolution</h3></div></div>
     <section class="modules-grid">
       <button class="module-card glass" data-module="Decision Lab"><span>🧠</span><b>Decision Lab</b><small>Think through consequences</small><em>PLAYABLE</em></button>
       <button class="module-card glass" data-module="Social Arena"><span>🎭</span><b>Social Arena</b><small>Read people & situations</small><em>PLAYABLE</em></button>
-      <button class="module-card glass" data-module="Career Sim"><span>💼</span><b>Career Sim</b><small>Build your future path</small></button>
+      <button class="module-card glass" data-module="Career Sim"><span>💼</span><b>Career Sim</b><small>Build your future path</small><em>PLAYABLE</em></button>
       <button class="module-card glass" data-module="Business Sim"><span>📈</span><b>Business Sim</b><small>Run decisions like a founder</small></button>
       <button class="module-card glass" data-module="English Arena"><span>🗣️</span><b>English Arena</b><small>Practice real conversations</small></button>
       <button class="module-card glass" data-module="Life RPG"><span>⚔️</span><b>Life RPG</b><small>Turn real actions into XP</small></button>
@@ -64,84 +48,36 @@
 
   <section id="decisionLab" class="lab-screen" aria-hidden="true">
     <div class="lab-shell">
-      <header class="lab-header glass">
-        <button id="closeLab" class="lab-back" aria-label="Close Decision Lab">←</button>
-        <div><p class="eyebrow">TRAINING ZONE 01</p><h3>Decision Lab</h3></div>
-        <span id="labProgress" class="lab-progress">1 / 5</span>
-      </header>
-      <div class="lab-intro glass">
-        <span class="lab-chip">🧠 REAL-WORLD SCENARIO</span>
-        <p id="scenarioContext" class="scenario-context"></p>
-        <h2 id="scenarioQuestion" class="scenario-question"></h2>
-        <p class="subtle lab-hint">Choose what you would actually do — not what sounds smartest.</p>
-      </div>
+      <header class="lab-header glass"><button id="closeLab" class="lab-back" aria-label="Close Decision Lab">←</button><div><p class="eyebrow">TRAINING ZONE 01</p><h3>Decision Lab</h3></div><span id="labProgress" class="lab-progress">1 / 5</span></header>
+      <div class="lab-intro glass"><span class="lab-chip">🧠 REAL-WORLD SCENARIO</span><p id="scenarioContext" class="scenario-context"></p><h2 id="scenarioQuestion" class="scenario-question"></h2><p class="subtle lab-hint">Choose what you would actually do — not what sounds smartest.</p></div>
       <div id="choicesList" class="choices-list"></div>
-      <article id="decisionResult" class="decision-result glass" hidden>
-        <p class="eyebrow">CONSEQUENCE REVEAL</p>
-        <h3 id="resultTitle"></h3>
-        <p id="resultText" class="subtle"></p>
-        <div id="resultTraits" class="trait-row"></div>
-        <button id="nextScenario" class="primary-action">Next scenario →</button>
-      </article>
-      <article id="decisionSummary" class="decision-summary glass" hidden>
-        <p class="eyebrow">SESSION COMPLETE</p>
-        <div class="summary-orb">🧠</div>
-        <h2>Your decision profile</h2>
-        <p id="profileLabel" class="profile-label"></p>
-        <p id="profileSummary" class="subtle"></p>
-        <div id="profileBars" class="profile-bars"></div>
-        <button id="finishLab" class="primary-action">Collect XP & return</button>
-      </article>
+      <article id="decisionResult" class="decision-result glass" hidden><p class="eyebrow">CONSEQUENCE REVEAL</p><h3 id="resultTitle"></h3><p id="resultText" class="subtle"></p><div id="resultTraits" class="trait-row"></div><button id="nextScenario" class="primary-action">Next scenario →</button></article>
+      <article id="decisionSummary" class="decision-summary glass" hidden><p class="eyebrow">SESSION COMPLETE</p><div class="summary-orb">🧠</div><h2>Your decision profile</h2><p id="profileLabel" class="profile-label"></p><p id="profileSummary" class="subtle"></p><div id="profileBars" class="profile-bars"></div><button id="finishLab" class="primary-action">Collect XP & return</button></article>
     </div>
   </section>
 
   <section id="socialArena" class="social-screen" aria-hidden="true">
     <div class="social-shell">
-      <header class="social-header glass">
-        <button id="closeSocial" class="social-back" aria-label="Close Social Arena">←</button>
-        <div><p class="eyebrow">TRAINING ZONE 02</p><h3>Social Arena</h3></div>
-        <span id="socialProgress" class="social-progress">1 / 5</span>
-      </header>
-
-      <article class="social-scene glass">
-        <span class="social-chip">🎭 READ THE SITUATION</span>
-        <div class="scene-person"><div id="socialAvatar" class="scene-avatar">🙂</div><div><b id="socialPerson">Person</b><small>Observe before assuming</small></div></div>
-        <p id="socialContext" class="scene-context"></p>
-        <h2 id="socialQuestion" class="scene-question"></h2>
-        <div id="socialSignals" class="signals"></div>
-      </article>
-
+      <header class="social-header glass"><button id="closeSocial" class="social-back" aria-label="Close Social Arena">←</button><div><p class="eyebrow">TRAINING ZONE 02</p><h3>Social Arena</h3></div><span id="socialProgress" class="social-progress">1 / 5</span></header>
+      <article class="social-scene glass"><span class="social-chip">🎭 READ THE SITUATION</span><div class="scene-person"><div id="socialAvatar" class="scene-avatar">🙂</div><div><b id="socialPerson">Person</b><small>Observe before assuming</small></div></div><p id="socialContext" class="scene-context"></p><h2 id="socialQuestion" class="scene-question"></h2><div id="socialSignals" class="signals"></div></article>
       <div id="socialChoices" class="social-choices"></div>
+      <article id="socialResult" class="social-result glass" hidden><p class="eyebrow">SOCIAL READ</p><h3 id="socialResultTitle"></h3><p id="socialResultText" class="subtle"></p><div class="read-meter"><span>READ QUALITY</span><div class="read-track"><div id="readFill" class="read-fill"></div></div><b id="readScore">0/4</b></div><div id="socialInsight" class="insight-box"></div><button id="nextSocial" class="primary-action">Next situation →</button></article>
+      <article id="socialSummary" class="social-summary glass" hidden><p class="eyebrow">SESSION COMPLETE</p><div class="summary-orb">🎭</div><h2>Your social-reading profile</h2><p id="socialProfileLabel" class="profile-label"></p><p id="socialProfileSummary" class="subtle"></p><div id="socialProfileBars" class="social-profile-bars"></div><button id="finishSocial" class="primary-action">Collect XP & return</button></article>
+    </div>
+  </section>
 
-      <article id="socialResult" class="social-result glass" hidden>
-        <p class="eyebrow">SOCIAL READ</p>
-        <h3 id="socialResultTitle"></h3>
-        <p id="socialResultText" class="subtle"></p>
-        <div class="read-meter"><span>READ QUALITY</span><div class="read-track"><div id="readFill" class="read-fill"></div></div><b id="readScore">0/4</b></div>
-        <div id="socialInsight" class="insight-box"></div>
-        <button id="nextSocial" class="primary-action">Next situation →</button>
-      </article>
-
-      <article id="socialSummary" class="social-summary glass" hidden>
-        <p class="eyebrow">SESSION COMPLETE</p>
-        <div class="summary-orb">🎭</div>
-        <h2>Your social-reading profile</h2>
-        <p id="socialProfileLabel" class="profile-label"></p>
-        <p id="socialProfileSummary" class="subtle"></p>
-        <div id="socialProfileBars" class="social-profile-bars"></div>
-        <button id="finishSocial" class="primary-action">Collect XP & return</button>
-      </article>
+  <section id="careerSim" class="career-screen" aria-hidden="true">
+    <div class="career-shell">
+      <header class="career-header glass"><button id="closeCareer" class="career-back" aria-label="Close Career Simulator">←</button><div><p class="eyebrow">TRAINING ZONE 03</p><h3>Career Simulator</h3></div><span id="careerStep" class="career-step">START</span></header>
+      <div id="careerContent"></div>
     </div>
   </section>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <nav class="bottom-nav glass">
-    <button class="active"><span class="nav-icon">⌂</span><span>Home</span></button>
-    <button id="playBtn"><span class="nav-icon">◎</span><span>Play</span></button>
-    <button id="resetBtn"><span class="nav-icon">↻</span><span>Reset</span></button>
-  </nav>
+  <nav class="bottom-nav glass"><button class="active"><span class="nav-icon">⌂</span><span>Home</span></button><button id="playBtn"><span class="nav-icon">◎</span><span>Play</span></button><button id="resetBtn"><span class="nav-icon">↻</span><span>Reset</span></button></nav>
 
   <script src="app.js?v=4"></script>
   <script src="social.js?v=1"></script>
+  <script src="career.js?v=1"></script>
 </body>
 </html>
