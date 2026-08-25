@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#070b14" />
+  <meta name="description" content="EVOLVE — turn real-life growth into a game." />
+  <title>EVOLVE — Level Up Your Real Life</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
+  <main class="app-shell">
+    <header class="topbar glass">
+      <div>
+        <p class="eyebrow">PERSONAL GROWTH OS</p>
+        <h1>EVOLVE</h1>
+      </div>
+      <button id="themeToggle" class="icon-btn" aria-label="Switch theme">☀︎</button>
+    </header>
+
+    <section class="hero glass">
+      <div class="hero-topline"><span class="live-dot"></span>LIVE PROGRESS</div>
+      <h2>N S H D</h2>
+      <p class="subtle">Level <strong id="level">1</strong> · <span id="levelTitle">Awakening</span></p>
+
+      <div class="xp-row">
+        <div class="xp-track" aria-label="XP progress"><div id="xpBar" class="xp-fill"></div></div>
+        <span id="xpText">0 / 100 XP</span>
+      </div>
+
+      <div class="hero-meta">
+        <span>🔥 <b id="streak">0</b> day streak</span>
+        <span>⚡ <b id="totalXP">0</b> total XP</span>
+      </div>
+    </section>
+
+    <div class="section-head">
+      <div><p class="eyebrow">YOUR BUILD</p><h3>Core stats</h3></div>
+      <span id="rankBadge" class="rank-badge">Rookie</span>
+    </div>
+    <section id="statsGrid" class="stats-grid"></section>
+
+    <div class="section-head">
+      <div><p class="eyebrow">TODAY</p><h3>Daily quests</h3></div>
+      <span id="questCount" class="subtle">0/0</span>
+    </div>
+    <section id="questList" class="quest-list"></section>
+
+    <div class="section-head">
+      <div><p class="eyebrow">TRAINING ZONES</p><h3>Choose your next evolution</h3></div>
+    </div>
+    <section class="modules-grid">
+      <button class="module-card glass" data-module="Decision Lab"><span>🧠</span><b>Decision Lab</b><small>Think through consequences</small></button>
+      <button class="module-card glass" data-module="Social Arena"><span>🎭</span><b>Social Arena</b><small>Read people & situations</small></button>
+      <button class="module-card glass" data-module="Career Sim"><span>💼</span><b>Career Sim</b><small>Build your future path</small></button>
+      <button class="module-card glass" data-module="Business Sim"><span>📈</span><b>Business Sim</b><small>Run decisions like a founder</small></button>
+      <button class="module-card glass" data-module="English Arena"><span>🗣️</span><b>English Arena</b><small>Practice real conversations</small></button>
+      <button class="module-card glass" data-module="Life RPG"><span>⚔️</span><b>Life RPG</b><small>Turn real actions into XP</small></button>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <nav class="bottom-nav glass">
+    <button class="active"><span class="nav-icon">⌂</span><span>Home</span></button>
+    <button id="playBtn"><span class="nav-icon">◎</span><span>Play</span></button>
+    <button id="resetBtn"><span class="nav-icon">↻</span><span>Reset</span></button>
+  </nav>
+
+  <script src="app.js"></script>
+</body>
+</html>
