@@ -1,0 +1,19 @@
+{
+  "name": "EVOLVE — Level Up Your Real Life",
+  "short_name": "EVOLVE",
+  "description": "A real-life RPG for growth, decisions, confidence, career, business and communication.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#070b14",
+  "theme_color": "#070b14",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "evolve-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
