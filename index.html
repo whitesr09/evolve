@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="ui-fixes.css?v=1" />
   <link rel="stylesheet" href="social.css?v=1" />
   <link rel="stylesheet" href="career.css?v=1" />
+  <link rel="stylesheet" href="business.css?v=1" />
 </head>
 <body>
   <div class="ambient ambient-one"></div>
@@ -40,7 +41,7 @@
       <button class="module-card glass" data-module="Decision Lab"><span>🧠</span><b>Decision Lab</b><small>Think through consequences</small><em>PLAYABLE</em></button>
       <button class="module-card glass" data-module="Social Arena"><span>🎭</span><b>Social Arena</b><small>Read people & situations</small><em>PLAYABLE</em></button>
       <button class="module-card glass" data-module="Career Sim"><span>💼</span><b>Career Sim</b><small>Build your future path</small><em>PLAYABLE</em></button>
-      <button class="module-card glass" data-module="Business Sim"><span>📈</span><b>Business Sim</b><small>Run decisions like a founder</small></button>
+      <button class="module-card glass" data-module="Business Sim"><span>📈</span><b>Business Sim</b><small>Run decisions like a founder</small><em>PLAYABLE</em></button>
       <button class="module-card glass" data-module="English Arena"><span>🗣️</span><b>English Arena</b><small>Practice real conversations</small></button>
       <button class="module-card glass" data-module="Life RPG"><span>⚔️</span><b>Life RPG</b><small>Turn real actions into XP</small></button>
     </section>
@@ -73,11 +74,19 @@
     </div>
   </section>
 
+  <section id="businessSim" class="business-screen" aria-hidden="true">
+    <div class="business-shell">
+      <header class="business-header glass"><button id="closeBusiness" class="business-back" aria-label="Close Business Simulator">←</button><div><p class="eyebrow">TRAINING ZONE 04</p><h3>Business Simulator</h3></div><span id="businessStep" class="business-step">START</span></header>
+      <div id="businessContent"></div>
+    </div>
+  </section>
+
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <nav class="bottom-nav glass"><button class="active"><span class="nav-icon">⌂</span><span>Home</span></button><button id="playBtn"><span class="nav-icon">◎</span><span>Play</span></button><button id="resetBtn"><span class="nav-icon">↻</span><span>Reset</span></button></nav>
 
   <script src="app.js?v=4"></script>
   <script src="social.js?v=1"></script>
   <script src="career.js?v=1"></script>
+  <script src="business.js?v=1"></script>
 </body>
 </html>
