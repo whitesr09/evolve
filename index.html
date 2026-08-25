@@ -25,12 +25,10 @@
       <div class="hero-topline"><span class="live-dot"></span>LIVE PROGRESS</div>
       <h2>N S H D</h2>
       <p class="subtle">Level <strong id="level">1</strong> · <span id="levelTitle">Awakening</span></p>
-
       <div class="xp-row">
         <div class="xp-track" aria-label="XP progress"><div id="xpBar" class="xp-fill"></div></div>
         <span id="xpText">0 / 100 XP</span>
       </div>
-
       <div class="hero-meta">
         <span>🔥 <b id="streak">0</b> day streak</span>
         <span>⚡ <b id="totalXP">0</b> total XP</span>
@@ -53,7 +51,7 @@
       <div><p class="eyebrow">TRAINING ZONES</p><h3>Choose your next evolution</h3></div>
     </div>
     <section class="modules-grid">
-      <button class="module-card glass" data-module="Decision Lab"><span>🧠</span><b>Decision Lab</b><small>Think through consequences</small></button>
+      <button class="module-card glass" data-module="Decision Lab"><span>🧠</span><b>Decision Lab</b><small>Think through consequences</small><em>PLAYABLE</em></button>
       <button class="module-card glass" data-module="Social Arena"><span>🎭</span><b>Social Arena</b><small>Read people & situations</small></button>
       <button class="module-card glass" data-module="Career Sim"><span>💼</span><b>Career Sim</b><small>Build your future path</small></button>
       <button class="module-card glass" data-module="Business Sim"><span>📈</span><b>Business Sim</b><small>Run decisions like a founder</small></button>
@@ -62,8 +60,47 @@
     </section>
   </main>
 
+  <section id="decisionLab" class="lab-screen" aria-hidden="true">
+    <div class="lab-shell">
+      <header class="lab-header glass">
+        <button id="closeLab" class="lab-back" aria-label="Close Decision Lab">←</button>
+        <div><p class="eyebrow">TRAINING ZONE 01</p><h3>Decision Lab</h3></div>
+        <span id="labProgress" class="lab-progress">1 / 5</span>
+      </header>
+
+      <div class="lab-intro glass">
+        <span class="lab-chip">🧠 REAL-WORLD SCENARIO</span>
+        <p id="scenarioContext" class="scenario-context"></p>
+        <h2 id="scenarioQuestion" class="scenario-question"></h2>
+        <p class="subtle lab-hint">Choose what you would actually do — not what sounds smartest.</p>
+      </div>
+
+      <div id="choicesList" class="choices-list"></div>
+
+      <article id="decisionResult" class="decision-result glass" hidden>
+        <p class="eyebrow">CONSEQUENCE REVEAL</p>
+        <h3 id="resultTitle"></h3>
+        <p id="resultText" class="subtle"></p>
+        <div id="resultTraits" class="trait-row"></div>
+        <button id="nextScenario" class="primary-action">Next scenario →</button>
+      </article>
+
+      <article id="decisionSummary" class="decision-summary glass" hidden>
+        <p class="eyebrow">SESSION COMPLETE</p>
+        <div class="summary-orb">🧠</div>
+        <h2>Your decision profile</h2>
+        <p id="profileLabel" class="profile-label"></p>
+        <p id="profileSummary" class="subtle"></p>
+        <div id="profileBars" class="profile-bars"></div>
+        <button id="finishLab" class="primary-action">Collect XP & return</button>
+      </article>
+    </div>
+  </section>
+
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <nav class="bottom-nav glass">
+    <span class="nav-refraction nav-refraction-left"></span>
+    <span class="nav-refraction nav-refraction-right"></span>
     <button class="active"><span class="nav-icon">⌂</span><span>Home</span></button>
     <button id="playBtn"><span class="nav-icon">◎</span><span>Play</span></button>
     <button id="resetBtn"><span class="nav-icon">↻</span><span>Reset</span></button>
