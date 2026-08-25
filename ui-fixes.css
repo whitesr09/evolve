@@ -1,0 +1,8 @@
+/* EVOLVE mobile nav cleanup + liquid glass refinements */
+.nav-refraction{display:none!important}
+.bottom-nav{overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.012)),var(--surface);box-shadow:0 16px 42px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.11),inset 0 -1px 0 rgba(255,255,255,.035),inset 18px 0 26px rgba(34,211,238,.035),inset -18px 0 26px rgba(139,92,246,.035)}
+.bottom-nav:before{background:linear-gradient(100deg,rgba(255,255,255,.12),transparent 18%,transparent 82%,rgba(255,255,255,.1));opacity:.55}
+.bottom-nav:after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(90deg,rgba(34,211,238,.06),transparent 14%,transparent 86%,rgba(139,92,246,.06));mix-blend-mode:screen}
+.bottom-nav button.active{background:transparent!important;box-shadow:none!important;color:var(--text)}
+.bottom-nav button{transition:color .18s ease,transform .18s ease}
+.bottom-nav button:active{transform:scale(.96)}
