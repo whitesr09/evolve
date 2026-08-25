@@ -8,6 +8,7 @@
   <title>EVOLVE — Level Up Your Real Life</title>
   <link rel="stylesheet" href="style.css?v=4" />
   <link rel="stylesheet" href="ui-fixes.css?v=1" />
+  <link rel="stylesheet" href="social.css?v=1" />
 </head>
 <body>
   <div class="ambient ambient-one"></div>
@@ -53,7 +54,7 @@
     </div>
     <section class="modules-grid">
       <button class="module-card glass" data-module="Decision Lab"><span>🧠</span><b>Decision Lab</b><small>Think through consequences</small><em>PLAYABLE</em></button>
-      <button class="module-card glass" data-module="Social Arena"><span>🎭</span><b>Social Arena</b><small>Read people & situations</small></button>
+      <button class="module-card glass" data-module="Social Arena"><span>🎭</span><b>Social Arena</b><small>Read people & situations</small><em>PLAYABLE</em></button>
       <button class="module-card glass" data-module="Career Sim"><span>💼</span><b>Career Sim</b><small>Build your future path</small></button>
       <button class="module-card glass" data-module="Business Sim"><span>📈</span><b>Business Sim</b><small>Run decisions like a founder</small></button>
       <button class="module-card glass" data-module="English Arena"><span>🗣️</span><b>English Arena</b><small>Practice real conversations</small></button>
@@ -68,16 +69,13 @@
         <div><p class="eyebrow">TRAINING ZONE 01</p><h3>Decision Lab</h3></div>
         <span id="labProgress" class="lab-progress">1 / 5</span>
       </header>
-
       <div class="lab-intro glass">
         <span class="lab-chip">🧠 REAL-WORLD SCENARIO</span>
         <p id="scenarioContext" class="scenario-context"></p>
         <h2 id="scenarioQuestion" class="scenario-question"></h2>
         <p class="subtle lab-hint">Choose what you would actually do — not what sounds smartest.</p>
       </div>
-
       <div id="choicesList" class="choices-list"></div>
-
       <article id="decisionResult" class="decision-result glass" hidden>
         <p class="eyebrow">CONSEQUENCE REVEAL</p>
         <h3 id="resultTitle"></h3>
@@ -85,7 +83,6 @@
         <div id="resultTraits" class="trait-row"></div>
         <button id="nextScenario" class="primary-action">Next scenario →</button>
       </article>
-
       <article id="decisionSummary" class="decision-summary glass" hidden>
         <p class="eyebrow">SESSION COMPLETE</p>
         <div class="summary-orb">🧠</div>
@@ -98,6 +95,45 @@
     </div>
   </section>
 
+  <section id="socialArena" class="social-screen" aria-hidden="true">
+    <div class="social-shell">
+      <header class="social-header glass">
+        <button id="closeSocial" class="social-back" aria-label="Close Social Arena">←</button>
+        <div><p class="eyebrow">TRAINING ZONE 02</p><h3>Social Arena</h3></div>
+        <span id="socialProgress" class="social-progress">1 / 5</span>
+      </header>
+
+      <article class="social-scene glass">
+        <span class="social-chip">🎭 READ THE SITUATION</span>
+        <div class="scene-person"><div id="socialAvatar" class="scene-avatar">🙂</div><div><b id="socialPerson">Person</b><small>Observe before assuming</small></div></div>
+        <p id="socialContext" class="scene-context"></p>
+        <h2 id="socialQuestion" class="scene-question"></h2>
+        <div id="socialSignals" class="signals"></div>
+      </article>
+
+      <div id="socialChoices" class="social-choices"></div>
+
+      <article id="socialResult" class="social-result glass" hidden>
+        <p class="eyebrow">SOCIAL READ</p>
+        <h3 id="socialResultTitle"></h3>
+        <p id="socialResultText" class="subtle"></p>
+        <div class="read-meter"><span>READ QUALITY</span><div class="read-track"><div id="readFill" class="read-fill"></div></div><b id="readScore">0/4</b></div>
+        <div id="socialInsight" class="insight-box"></div>
+        <button id="nextSocial" class="primary-action">Next situation →</button>
+      </article>
+
+      <article id="socialSummary" class="social-summary glass" hidden>
+        <p class="eyebrow">SESSION COMPLETE</p>
+        <div class="summary-orb">🎭</div>
+        <h2>Your social-reading profile</h2>
+        <p id="socialProfileLabel" class="profile-label"></p>
+        <p id="socialProfileSummary" class="subtle"></p>
+        <div id="socialProfileBars" class="social-profile-bars"></div>
+        <button id="finishSocial" class="primary-action">Collect XP & return</button>
+      </article>
+    </div>
+  </section>
+
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <nav class="bottom-nav glass">
     <button class="active"><span class="nav-icon">⌂</span><span>Home</span></button>
@@ -106,5 +142,6 @@
   </nav>
 
   <script src="app.js?v=4"></script>
+  <script src="social.js?v=1"></script>
 </body>
 </html>
